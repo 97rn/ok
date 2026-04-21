@@ -3872,9 +3872,6 @@ local Library do
         end
     end
 
-    return Section
-end
-
 Library.Round = function(self, Number, Float)
     if not Float or Float == 0 then Float = 1 end
     local Multiplier = 1 / Float
