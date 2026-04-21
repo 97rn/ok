@@ -2032,7 +2032,82 @@ local Library do
                     Name = "\0",
                     Color = FromRGB(30, 33, 33),
                     ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-                }):AddToTheme({Color = "Border"})          
+                }):AddToTheme({Color = "Border"})
+
+                Items["TopRightButtons"] = Instances:Create("Frame", {
+                    Parent = Items["MainFrame"].Instance,
+                    Name = "TopRightButtons",
+                    BackgroundTransparency = 1,
+                    Position = UDim2New(1, -65, 0, 8),
+                    Size = UDim2New(0, 60, 0, 25),
+                    ZIndex = 10
+                })
+
+                Items["Minimize"] = Instances:Create("TextButton", {
+                    Parent = Items["TopRightButtons"].Instance,
+                    Name = "Minimize",
+                    Text = "-",
+                    TextColor3 = FromRGB(255, 255, 255),
+                    BackgroundTransparency = 1,
+                    Size = UDim2New(0, 25, 1, 0),
+                    Position = UDim2New(0, 0, 0, 0),
+                    TextSize = 24,
+                    FontFace = Library.Font,
+                    ZIndex = 11
+                })
+
+                Items["Close"] = Instances:Create("TextButton", {
+                    Parent = Items["TopRightButtons"].Instance,
+                    Name = "Close",
+                    Text = "X",
+                    TextColor3 = FromRGB(255, 255, 255),
+                    BackgroundTransparency = 1,
+                    Size = UDim2New(0, 25, 1, 0),
+                    Position = UDim2New(0, 30, 0, 0),
+                    TextSize = 18,
+                    FontFace = Library.Font,
+                    ZIndex = 11
+                })
+
+                Items["ReopenButton"] = Instances:Create("TextButton", {
+                    Parent = Library.Holder.Instance,
+                    Name = "Reopen",
+                    Text = " AERO - TAP TO REOPEN ",
+                    TextColor3 = FromRGB(255, 255, 255),
+                    BackgroundColor3 = FromRGB(21, 24, 24),
+                    Size = UDim2New(0, 0, 0, 32),
+                    Position = UDim2New(0, 10, 0.5, -16),
+                    Visible = false,
+                    TextSize = 13,
+                    FontFace = Library.Font,
+                    AutomaticSize = Enum.AutomaticSize.X,
+                    ZIndex = 100
+                })  Items["ReopenButton"]:AddToTheme({BackgroundColor3 = "Inline"})
+                
+                Instances:Create("UICorner", {
+                    Parent = Items["ReopenButton"].Instance,
+                    CornerRadius = UDimNew(0, 7)
+                })
+                
+                Instances:Create("UIStroke", {
+                    Parent = Items["ReopenButton"].Instance,
+                    Color = FromRGB(30, 33, 33),
+                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+                }):AddToTheme({Color = "Border"})
+
+                Items["Minimize"]:Connect("MouseButton1Down", function()
+                    Items["MainFrame"].Instance.Visible = false
+                    Items["ReopenButton"].Instance.Visible = true
+                end)
+
+                Items["Close"]:Connect("MouseButton1Down", function()
+                    Library:Unload()
+                end)
+
+                Items["ReopenButton"]:Connect("MouseButton1Down", function()
+                    Items["MainFrame"].Instance.Visible = true
+                    Items["ReopenButton"].Instance.Visible = false
+                end)
                 
                 Items["Bottom_"] = Instances:Create("Frame", {
                     Parent = Items["Side"].Instance,
